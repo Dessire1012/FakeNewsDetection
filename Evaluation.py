@@ -21,7 +21,6 @@ def vectorize_test_data(X_test):
     return X_test_tfidf, X_test_bow, X_test_ngrams
 
 # Paso 3: Evaluar los modelos en los datos de prueba
-# Paso 3: Evaluar los modelos en los datos de prueba
 def evaluate_models_on_test_data(X_test_tfidf, X_test_bow, X_test_ngrams, y_test, training_times_df):
     vectorizer_dict = {
         "n-grams": X_test_ngrams,
