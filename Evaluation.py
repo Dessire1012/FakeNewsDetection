@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.metrics import classification_report
 import joblib
 
 # Paso 1: Cargar los datos preprocesados
@@ -20,6 +21,7 @@ def vectorize_test_data(X_test):
     return X_test_tfidf, X_test_bow, X_test_ngrams
 
 # Paso 3: Evaluar los modelos en los datos de prueba
+# Paso 3: Evaluar los modelos en los datos de prueba
 def evaluate_models_on_test_data(X_test_tfidf, X_test_bow, X_test_ngrams, y_test, training_times_df):
     vectorizer_dict = {
         "n-grams": X_test_ngrams,
@@ -38,8 +40,15 @@ def evaluate_models_on_test_data(X_test_tfidf, X_test_bow, X_test_ngrams, y_test
         model = joblib.load(model_filename)
         X_test = vectorizer_dict[vectorizer_name]
 
-        accuracy = model.score(X_test, y_test)
-        results.append((model_name, vectorizer_name, accuracy, hyperparams))
+        predictions = model.predict(X_test)
+        report = classification_report(y_test, predictions, output_dict=True, zero_division=0)
+
+        accuracy = report['accuracy']
+        precision = report['macro avg']['precision']
+        recall = report['macro avg']['recall']
+        f1_score = report['macro avg']['f1-score']
+
+        results.append((model_name, vectorizer_name, accuracy, precision, recall, f1_score, hyperparams))
 
     return results
 
@@ -60,7 +69,9 @@ def evaluate_workflow():
     results = evaluate_models_on_test_data(X_test_tfidf, X_test_bow, X_test_ngrams, y_test, training_times_df)
 
     # Crear DataFrame con los resultados
-    results_df = pd.DataFrame(results, columns=['Modelo', 'Vectorizer', 'Accuracy', 'Hiperparámetros'])
+    # Crear DataFrame con los resultados
+    results_df = pd.DataFrame(results, columns=['Modelo', 'Vectorizer', 'Accuracy', 'Precision', 'Recall', 'F1-Score',
+                                                'Hiperparámetros'])
 
     # Guardar el DataFrame en un archivo Excel
     results_df.to_excel('results.xlsx', index=False)
