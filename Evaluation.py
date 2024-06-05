@@ -68,7 +68,6 @@ def evaluate_workflow():
     results = evaluate_models_on_test_data(X_test_tfidf, X_test_bow, X_test_ngrams, y_test, training_times_df)
 
     # Crear DataFrame con los resultados
-    # Crear DataFrame con los resultados
     results_df = pd.DataFrame(results, columns=['Modelo', 'Vectorizer', 'Accuracy', 'Precision', 'Recall', 'F1-Score',
                                                 'Hiperparámetros'])
 
