@@ -48,7 +48,7 @@ def run_workflow():
     param_grids = {
         "Naive_Bayes": {'alpha': [0.01, 0.1, 1, 5, 10]},
         "SVM": {'C': [0.1, 1, 5, 10], 'kernel': ['linear', 'rbf']},
-        "Logistic_Regression": {'max_iter': [100, 200, 500], 'solver': ['lbfgs', 'liblinear']}
+        "Logistic_Regression": {'max_iter': [1000, 2000, 5000], 'solver': ['lbfgs', 'liblinear']}
     }
 
     for model_name, model in models.items():
