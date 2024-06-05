@@ -36,7 +36,6 @@ def main():
     # Paso 2: Cargar el vectorizador y el modelo
     bow_vectorizer, model = cargar_modelos('vectorizers/bow_vectorizer.joblib', 'models/Naive_Bayes_1_model.joblib')
 
-    total_noticias = len(noticias)
     fake_count = 0
     true_count = 0
 
