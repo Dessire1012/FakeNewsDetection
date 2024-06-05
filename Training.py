@@ -40,15 +40,12 @@ def transform_data(X_train, X_test):
 # Paso 3: Entrenar y guardar modelos
 def train_and_save_models(X_train, y_train, vectorizer_type):
     models = [
-        ("Naive_Bayes_1", MultinomialNB(alpha=1.0)),
-        ("Naive_Bayes_2", MultinomialNB(alpha=0.5)),
-        ("Naive_Bayes_3", MultinomialNB(alpha=0.1)),
+        ("Naive_Bayes_1", MultinomialNB(alpha=1)),
+        ("Naive_Bayes_2", MultinomialNB(alpha=0.1)),
+        ("Naive_Bayes_3", MultinomialNB(alpha=0.01)),
         ("SVM_1", SVC(C=1.0, kernel='linear')),
-        ("SVM_2", SVC(C=0.5, kernel='linear')),
-        ("SVM_3", SVC(C=1.0, kernel='rbf')),
-        ("Logistic_Regression_1", LogisticRegression(max_iter=1000, solver='lbfgs')),
-        ("Logistic_Regression_2", LogisticRegression(max_iter=1000, solver='liblinear')),
-        ("Logistic_Regression_3", LogisticRegression(max_iter=2000, solver='lbfgs'))
+        ("SVM_2", SVC(C=10.0, kernel='rbf')),
+        ("Logistic_Regression_1", LogisticRegression(max_iter=1000, solver='lbfgs'))
     ]
 
     if not os.path.exists("models"):
